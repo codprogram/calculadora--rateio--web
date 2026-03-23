@@ -156,7 +156,7 @@ function summaryCards(original, final, finalPercent) {
     const target = moveTarget();
     const moveBalance = target - movedCredit();
     return [
-        { title: "Unidades", value: String(units.length), note: "No cenário atual" },
+        { title: "Unidades", value: String(units.length), note: "Quantidade de unidades consumidoras" },
         { title: "Crédito Base", value: formatNumber(original), note: "Base de 100%" },
         { title: "Valor a Mover", value: formatNumber(target), note: "Planejado pelo cliente" },
         { title: "Saldo da Movimentação", value: formatNumber(moveBalance), note: movementNote(target, moveBalance) },
