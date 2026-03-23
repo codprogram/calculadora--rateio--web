@@ -13,6 +13,7 @@ const calcValueA = document.getElementById("calcValueA");
 const calcValueB = document.getElementById("calcValueB");
 const calcResult = document.getElementById("calcResult");
 const calcOpButtons = Array.from(document.querySelectorAll(".calc-op-button"));
+const themeToggle = document.getElementById("themeToggle");
 
 let calcOperation = "sub";
 
@@ -342,3 +343,7 @@ calcOpButtons.forEach((button) => {
 });
 
 renderApp();
+
+themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+});
