@@ -1,10 +1,4 @@
-const units = [
-    { code: "6633", original: 670, final: 670 },
-    { code: "4978", original: 612, final: 612 },
-    { code: "7196", original: 130, final: 130 },
-    { code: "6145", original: 187, final: 187 },
-    { code: "8706", original: 201, final: 201 }
-];
+const units = [];
 
 const unitsList = document.getElementById("unitsList");
 const unitTemplate = document.getElementById("unitTemplate");
