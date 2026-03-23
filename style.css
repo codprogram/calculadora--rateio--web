@@ -359,23 +359,131 @@ h1 {
 @media (max-width: 600px) {
     .app-shell {
         width: min(100% - 16px, 1120px);
-        padding-top: 12px;
+        padding-top: 10px;
     }
 
-    .value-row,
+    .hero-card,
+    .summary-card,
+    .unit-card,
+    .footer-card {
+        border-radius: 14px;
+    }
+
+    .hero-card {
+        padding: 12px;
+    }
+
+    .hero-layout {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 10px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    .hero-copy {
+        font-size: 11px;
+        line-height: 1.35;
+    }
+
+    .base-pill {
+        font-size: 11px;
+        padding: 7px 10px;
+    }
+
+    .hero-logo {
+        width: 132px;
+        max-width: 132px;
+        max-height: 54px;
+        justify-self: end;
+    }
+
     .summary-grid,
     .metrics-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+    }
+
+    .summary-card {
+        padding: 10px;
+    }
+
+    .summary-card strong {
+        font-size: 16px;
     }
 
     .section-header,
     .footer-header,
     .unit-card-top {
-        align-items: flex-start;
-        flex-direction: column;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 
-    .hero-layout {
+    .section-header h2,
+    .footer-header h2 {
+        font-size: 14px;
+    }
+
+    .primary-button {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+
+    .delete-button {
+        padding: 5px 8px;
+        font-size: 11px;
+    }
+
+    .unit-card {
+        padding: 8px;
+    }
+
+    .unit-code-input {
+        font-size: 13px;
+    }
+
+    .number-input {
+        padding: 8px 9px;
+        font-size: 14px;
+    }
+
+    .metric-box {
+        padding: 7px;
+    }
+
+    .metric-box strong {
+        font-size: 11px;
+    }
+
+    .footer-card {
+        padding: 12px;
+    }
+
+    .footer-line {
+        font-size: 11px;
+    }
+
+    .footer-line strong,
+    .status-message {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 380px) {
+    .hero-layout,
+    .section-header,
+    .footer-header,
+    .unit-card-top {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .value-row,
+    .summary-grid,
+    .metrics-grid {
         grid-template-columns: 1fr;
     }
 
@@ -386,8 +494,8 @@ h1 {
     }
 
     .hero-logo {
-        max-width: 400px;
-        max-height: 102px;
+        max-width: 180px;
+        max-height: 70px;
         justify-self: start;
     }
 }
