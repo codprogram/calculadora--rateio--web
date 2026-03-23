@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Rateio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="app-shell">
+        <section class="hero-card">
+            <div class="hero-layout">
+                <div>
+                    <p class="eyebrow">Calculadora de Rateio</p>
+                    <h1>Painel de Rateio</h1>
+                    <p class="hero-copy">
+                        Edite o kWh final de cada unidade e acompanhe o impacto em kWh e em percentual
+                        sobre a base fixa do total original.
+                    </p>
+                </div>
+                <img class="hero-logo" src="sun%E2%80%8B-prime%E2%80%8B-energy%E2%80%8B.png" alt="Sun Prime Energy">
+            </div>
+            <div class="base-pill" id="basePercentual"></div>
+        </section>
+
+        <section class="summary-grid" id="summaryGrid"></section>
+
+        <section class="units-section">
+            <div class="section-header">
+                <h2>Unidades Consumidoras</h2>
+                <button id="addUnitButton" class="primary-button" type="button">Adicionar unidade</button>
+            </div>
+            <div id="unitsList" class="units-list"></div>
+        </section>
+
+        <section class="footer-card">
+            <div class="footer-header">
+                <h2>Conferência Final</h2>
+                <span id="statusBadge" class="status-badge"></span>
+            </div>
+            <div class="footer-grid" id="footerGrid"></div>
+            <p id="statusMessage" class="status-message"></p>
+        </section>
+    </main>
+
+    <template id="unitTemplate">
+        <article class="unit-card">
+            <div class="unit-card-top">
+                <div class="unit-id-block">
+                    <span class="unit-label"></span>
+                    <input class="unit-code-input" type="text" placeholder="Código da unidade">
+                </div>
+                <button class="delete-button" type="button" aria-label="Excluir unidade">Excluir</button>
+            </div>
+
+            <div class="value-row">
+                <label class="field">
+                    <span>kWh original</span>
+                    <input class="number-input input-original" type="number" step="0.1" min="0">
+                </label>
+                <label class="field">
+                    <span>kWh final</span>
+                    <input class="number-input input-final" type="number" step="0.1">
+                </label>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <span>Diferença</span>
+                    <strong class="metric-difference"></strong>
+                </div>
+                <div class="metric-box">
+                    <span>% Orig.</span>
+                    <strong class="metric-original-percent"></strong>
+                </div>
+                <div class="metric-box">
+                    <span>% Final</span>
+                    <strong class="metric-final-percent"></strong>
+                </div>
+                <div class="metric-box">
+                    <span>Delta %</span>
+                    <strong class="metric-percent-delta"></strong>
+                </div>
+            </div>
+        </article>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
