@@ -37,7 +37,8 @@ input {
 
 .hero-card,
 .footer-card,
-.unit-card {
+.unit-card,
+.quick-calc-card {
     background: var(--card);
     border: 1px solid var(--card-border);
     border-radius: 18px;
@@ -136,6 +137,82 @@ h1 {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 8px;
+}
+
+.quick-calc-card {
+    margin-top: 10px;
+    padding: 14px;
+}
+
+.quick-calc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.quick-calc-header h2 {
+    font-size: 16px;
+}
+
+.quick-calc-header p {
+    margin-top: 2px;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.quick-calc-toggle {
+    display: inline-flex;
+    padding: 4px;
+    border-radius: 12px;
+    background: rgba(20, 65, 67, 0.08);
+    gap: 4px;
+}
+
+.calc-op-button {
+    min-width: 38px;
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text);
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.calc-op-button.active {
+    background: linear-gradient(90deg, #1c6f77, #27936d);
+    color: white;
+}
+
+.quick-calc-grid {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.calc-result-box {
+    display: grid;
+    gap: 4px;
+}
+
+.calc-result-box span {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.calc-result-box strong {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 43px;
+    padding: 0 10px;
+    border-radius: 12px;
+    background: rgba(39, 93, 141, 0.10);
+    color: #275d8d;
+    font-size: 18px;
 }
 
 .summary-card {
@@ -383,6 +460,10 @@ h1 {
     .metrics-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .quick-calc-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 600px) {
@@ -394,7 +475,8 @@ h1 {
     .hero-card,
     .summary-card,
     .unit-card,
-    .footer-card {
+    .footer-card,
+    .quick-calc-card {
         border-radius: 14px;
     }
 
@@ -438,6 +520,15 @@ h1 {
     .metrics-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 6px;
+    }
+
+    .quick-calc-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .quick-calc-grid {
+        grid-template-columns: 1fr;
     }
 
     .summary-card {

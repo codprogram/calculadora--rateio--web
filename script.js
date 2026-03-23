@@ -15,6 +15,12 @@ const footerGrid = document.getElementById("footerGrid");
 const statusBadge = document.getElementById("statusBadge");
 const statusMessage = document.getElementById("statusMessage");
 const moveTargetInput = document.getElementById("moveTargetInput");
+const calcValueA = document.getElementById("calcValueA");
+const calcValueB = document.getElementById("calcValueB");
+const calcResult = document.getElementById("calcResult");
+const calcOpButtons = Array.from(document.querySelectorAll(".calc-op-button"));
+
+let calcOperation = "sub";
 
 function parseNumber(value) {
     const parsed = Number.parseFloat(String(value).replace(",", "."));
@@ -65,6 +71,12 @@ function moveTarget() {
 
 function movedCredit() {
     return units.reduce((sum, unit) => sum + Math.max(unit.final - unit.original, 0), 0);
+}
+
+function quickCalcResult() {
+    const valueA = parseNumber(calcValueA.value);
+    const valueB = parseNumber(calcValueB.value);
+    return calcOperation === "sum" ? valueA + valueB : valueA - valueB;
 }
 
 function percentOriginal(unit, originalBase) {
@@ -300,6 +312,7 @@ function renderApp() {
     const original = totalOriginal();
     const final = totalFinal();
 
+    calcResult.textContent = formatNumber(quickCalcResult());
     renderUnits();
     renderSummary(original, final);
     renderFooter(original, final);
@@ -316,6 +329,22 @@ addUnitButton.addEventListener("click", () => {
 
 moveTargetInput.addEventListener("input", () => {
     renderApp();
+});
+
+calcValueA.addEventListener("input", () => {
+    renderApp();
+});
+
+calcValueB.addEventListener("input", () => {
+    renderApp();
+});
+
+calcOpButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        calcOperation = button.dataset.op;
+        calcOpButtons.forEach((item) => item.classList.toggle("active", item === button));
+        renderApp();
+    });
 });
 
 renderApp();

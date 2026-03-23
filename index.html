@@ -29,6 +29,33 @@
 
         <section class="summary-grid" id="summaryGrid"></section>
 
+        <section class="quick-calc-card">
+            <div class="quick-calc-header">
+                <div>
+                    <h2>Calculadora Rápida</h2>
+                    <p>Faça somas e subtrações rápidas de crédito sem sair da tela.</p>
+                </div>
+                <div class="quick-calc-toggle">
+                    <button class="calc-op-button active" data-op="sub">-</button>
+                    <button class="calc-op-button" data-op="sum">+</button>
+                </div>
+            </div>
+            <div class="quick-calc-grid">
+                <label class="field">
+                    <span>Valor 1</span>
+                    <input id="calcValueA" class="number-input" type="number" step="0.1" placeholder="0,0">
+                </label>
+                <label class="field">
+                    <span>Valor 2</span>
+                    <input id="calcValueB" class="number-input" type="number" step="0.1" placeholder="0,0">
+                </label>
+                <div class="calc-result-box">
+                    <span>Resultado</span>
+                    <strong id="calcResult">0,0</strong>
+                </div>
+            </div>
+        </section>
+
         <section class="units-section">
             <div class="section-header">
                 <h2>Unidades Consumidoras</h2>
