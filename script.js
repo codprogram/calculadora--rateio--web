@@ -14,6 +14,7 @@ const summaryGrid = document.getElementById("summaryGrid");
 const footerGrid = document.getElementById("footerGrid");
 const statusBadge = document.getElementById("statusBadge");
 const statusMessage = document.getElementById("statusMessage");
+const moveTargetInput = document.getElementById("moveTargetInput");
 
 function parseNumber(value) {
     const parsed = Number.parseFloat(String(value).replace(",", "."));
@@ -58,6 +59,14 @@ function totalFinal() {
     return units.reduce((sum, unit) => sum + unit.final, 0);
 }
 
+function moveTarget() {
+    return parseNumber(moveTargetInput.value);
+}
+
+function movedCredit() {
+    return units.reduce((sum, unit) => sum + Math.max(unit.final - unit.original, 0), 0);
+}
+
 function percentOriginal(unit, originalBase) {
     if (originalBase <= 0) {
         return 0;
@@ -85,6 +94,8 @@ function badgeClass(status) {
 function statusData(original, final) {
     const balance = original - final;
     const hasNegative = units.some((unit) => unit.final < 0);
+    const target = moveTarget();
+    const moveBalance = target - movedCredit();
 
     if (hasNegative) {
         return {
@@ -98,6 +109,30 @@ function statusData(original, final) {
         return {
             text: `O saldo final ajustado ultrapassou o saldo base em ${formatNumber(Math.abs(balance))}.`,
             badge: "Ultrapassou",
+            kind: "erro"
+        };
+    }
+
+    if (target > 0) {
+        if (Math.abs(moveBalance) < 0.05) {
+            return {
+                text: "Movimentação conferida. O valor planejado foi redistribuído corretamente.",
+                badge: "Conferido",
+                kind: "ok"
+            };
+        }
+
+        if (moveBalance > 0) {
+            return {
+                text: `Ainda faltam ${formatNumber(moveBalance)} para concluir a movimentação planejada.`,
+                badge: "Falta mover",
+                kind: "alerta"
+            };
+        }
+
+        return {
+            text: `Você excedeu a movimentação planejada em ${formatNumber(Math.abs(moveBalance))}.`,
+            badge: "Excedeu",
             kind: "erro"
         };
     }
@@ -118,27 +153,43 @@ function statusData(original, final) {
 }
 
 function summaryCards(original, final, finalPercent) {
-    const balance = original - final;
+    const target = moveTarget();
+    const moveBalance = target - movedCredit();
     return [
         { title: "Crédito Base", value: formatNumber(original), note: "Base de 100%" },
-        { title: "Crédito Final", value: formatNumber(final), note: "Saldo redistribuído" },
-        { title: "Saldo Disponível", value: formatNumber(balance), note: balance < 0 ? "Ultrapassou o limite" : "Ainda pode distribuir" },
+        { title: "Valor a Mover", value: formatNumber(target), note: "Planejado pelo cliente" },
+        { title: "Saldo da Movimentação", value: formatNumber(moveBalance), note: movementNote(target, moveBalance) },
         { title: "% Final de Compensação", value: formatPercent(finalPercent), note: "Sobre a base original" }
     ];
 }
 
+function movementNote(target, moveBalance) {
+    if (target <= 0) {
+        return "Informe quanto mover";
+    }
+
+    if (Math.abs(moveBalance) < 0.05) {
+        return "Movimentação conferida";
+    }
+
+    if (moveBalance > 0) {
+        return "Ainda falta redistribuir";
+    }
+
+    return "Excedeu o planejado";
+}
+
 function footerLines(original, final, originalPercent, finalPercent) {
+    const target = moveTarget();
+    const moved = movedCredit();
+    const moveBalance = target - moved;
     return [
-        { label: "Soma saldo final ajustado", value: formatNumber(final), className: "" },
+        { label: "Crédito movido", value: formatNumber(moved), className: "" },
+        { label: "Valor a mover", value: formatNumber(target), className: "" },
         {
-            label: "Saldo disponível para ajuste",
-            value: formatNumber(original - final),
-            className: original - final < 0 ? "negative" : "positive"
-        },
-        {
-            label: "Soma % original de compensação",
-            value: formatPercent(originalPercent),
-            className: Math.abs(originalPercent - 100) < 0.01 ? "positive" : "negative"
+            label: "Saldo da movimentação",
+            value: formatNumber(moveBalance),
+            className: Math.abs(moveBalance) < 0.05 ? "positive" : moveBalance > 0 ? "neutral" : "negative"
         },
         {
             label: "Soma % final de compensação",
@@ -259,6 +310,10 @@ addUnitButton.addEventListener("click", () => {
         original: 0,
         final: 0
     });
+    renderApp();
+});
+
+moveTargetInput.addEventListener("input", () => {
     renderApp();
 });
 

@@ -107,6 +107,30 @@ h1 {
     font-weight: 700;
 }
 
+.planner-field {
+    display: grid;
+    gap: 4px;
+    width: fit-content;
+}
+
+.planner-field span {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.planner-field input {
+    width: 140px;
+    border: 1px solid #d7e6e5;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--text);
+    padding: 9px 10px;
+    font-size: 14px;
+    font-weight: 800;
+    outline: none;
+}
+
 .summary-grid {
     margin-top: 10px;
     display: grid;
@@ -395,6 +419,12 @@ h1 {
     .base-pill {
         font-size: 11px;
         padding: 7px 10px;
+    }
+
+    .planner-field input {
+        width: 120px;
+        padding: 8px 9px;
+        font-size: 13px;
     }
 
     .hero-logo {
