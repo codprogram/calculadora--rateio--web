@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Rateio</title>
+    <title>Calculadora de Compensação</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,11 +11,11 @@
         <section class="hero-card">
             <div class="hero-layout">
                 <div>
-                    <p class="eyebrow">Calculadora de Rateio</p>
-                    <h1>Painel de Rateio</h1>
+                    <p class="eyebrow">Calculadora de Compensação</p>
+                    <h1>Painel de Compensação</h1>
                     <p class="hero-copy">
-                        Edite o kWh final de cada unidade e acompanhe o impacto em kWh e em percentual
-                        sobre a base fixa do total original.
+                        Edite o saldo final de crédito de cada unidade e acompanhe o impacto no crédito
+                        e no percentual final de compensação.
                     </p>
                 </div>
                 <img class="hero-logo" src="sun%E2%80%8B-prime%E2%80%8B-energy%E2%80%8B.png" alt="Sun Prime Energy">
@@ -48,33 +48,33 @@
             <div class="unit-card-top">
                 <div class="unit-id-block">
                     <span class="unit-label"></span>
-                    <input class="unit-code-input" type="text" placeholder="Código da unidade">
+                    <input class="unit-code-input" type="text" placeholder="Código do cliente">
                 </div>
                 <button class="delete-button" type="button" aria-label="Excluir unidade">Excluir</button>
             </div>
 
             <div class="value-row">
                 <label class="field">
-                    <span>kWh original</span>
+                    <span>Crédito acumulado</span>
                     <input class="number-input input-original" type="number" step="0.1" min="0">
                 </label>
                 <label class="field">
-                    <span>kWh final</span>
+                    <span>Saldo final ajustado</span>
                     <input class="number-input input-final" type="number" step="0.1">
                 </label>
             </div>
 
             <div class="metrics-grid">
                 <div class="metric-box">
-                    <span>Diferença</span>
+                    <span>Crédito transferido</span>
                     <strong class="metric-difference"></strong>
                 </div>
                 <div class="metric-box">
-                    <span>% Orig.</span>
+                    <span>% Original</span>
                     <strong class="metric-original-percent"></strong>
                 </div>
-                <div class="metric-box">
-                    <span>% Final</span>
+                <div class="metric-box metric-box-final">
+                    <span>% Final Comp.</span>
                     <strong class="metric-final-percent"></strong>
                 </div>
                 <div class="metric-box">

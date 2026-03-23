@@ -88,7 +88,7 @@ function statusData(original, final) {
 
     if (hasNegative) {
         return {
-            text: "Existe unidade com kWh final negativo. Ajuste os valores antes de compartilhar o cálculo.",
+            text: "Existe unidade com saldo final negativo. Ajuste os valores antes de compartilhar o cálculo.",
             badge: "Erro",
             kind: "erro"
         };
@@ -96,7 +96,7 @@ function statusData(original, final) {
 
     if (balance < 0) {
         return {
-            text: `O total final ultrapassou o total original em ${formatNumber(Math.abs(balance))} kWh.`,
+            text: `O saldo final ajustado ultrapassou o saldo base em ${formatNumber(Math.abs(balance))}.`,
             badge: "Ultrapassou",
             kind: "erro"
         };
@@ -104,14 +104,14 @@ function statusData(original, final) {
 
     if (balance === 0) {
         return {
-            text: "O total final está exatamente igual ao total original.",
+            text: "O saldo final ajustado está exatamente igual ao saldo de crédito acumulado.",
             badge: "Fechado",
             kind: "ok"
         };
     }
 
     return {
-        text: `Ainda restam ${formatNumber(balance)} kWh para distribuir sem ultrapassar o total original.`,
+        text: `Ainda restam ${formatNumber(balance)} de saldo de crédito para distribuir sem ultrapassar a base original.`,
         badge: "Em ajuste",
         kind: "alerta"
     };
@@ -120,28 +120,28 @@ function statusData(original, final) {
 function summaryCards(original, final, finalPercent) {
     const balance = original - final;
     return [
-        { title: "Total Original", value: formatNumber(original), note: "Base de 100%" },
-        { title: "Total Final", value: formatNumber(final), note: "Soma editada" },
+        { title: "Crédito Base", value: formatNumber(original), note: "Base de 100%" },
+        { title: "Crédito Final", value: formatNumber(final), note: "Saldo redistribuído" },
         { title: "Saldo Disponível", value: formatNumber(balance), note: balance < 0 ? "Ultrapassou o limite" : "Ainda pode distribuir" },
-        { title: "Percentual Final", value: formatPercent(finalPercent), note: "Sobre a base original" }
+        { title: "% Final de Compensação", value: formatPercent(finalPercent), note: "Sobre a base original" }
     ];
 }
 
 function footerLines(original, final, originalPercent, finalPercent) {
     return [
-        { label: "Soma kWh final", value: formatNumber(final), className: "" },
+        { label: "Soma saldo final ajustado", value: formatNumber(final), className: "" },
         {
-            label: "Saldo disponível",
+            label: "Saldo disponível para ajuste",
             value: formatNumber(original - final),
             className: original - final < 0 ? "negative" : "positive"
         },
         {
-            label: "Soma % original",
+            label: "Soma % original de compensação",
             value: formatPercent(originalPercent),
             className: Math.abs(originalPercent - 100) < 0.01 ? "positive" : "negative"
         },
         {
-            label: "Soma % final sobre a base original",
+            label: "Soma % final de compensação",
             value: formatPercent(finalPercent),
             className: finalPercent <= 100.01 ? "positive" : "negative"
         }
@@ -184,7 +184,7 @@ function renderUnits() {
     unitsList.innerHTML = "";
     const original = totalOriginal();
 
-    basePercentual.textContent = `Base percentual fixa: 100% = ${formatNumber(original)} kWh do total original`;
+    basePercentual.textContent = `Base percentual fixa: 100% = ${formatNumber(original)} de saldo de crédito acumulado`;
 
     units.forEach((unit, index) => {
         const fragment = unitTemplate.content.cloneNode(true);
